@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import uglify from 'gulp-uglify';
+import babili from 'gulp-babili';
 import coveralls from 'gulp-coveralls';
 import cssmin from 'gulp-cssmin';
 import concat from 'gulp-concat';
@@ -26,7 +27,7 @@ gulp.task('build', ['unit_test', 'build-css'], () => {
   return gulp.src(_scripts)
     .pipe(concat(_script.toLowerCase()))
     .pipe(gulp.dest(_dist))
-    .pipe(uglify())
+    .pipe(babili())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(_dist));
 });
@@ -38,7 +39,7 @@ gulp.task('unit_test', (done) => {
     browsers: ['Chrome']
   };
 
-  return Karma.start(_opts, done);
+  return new Karma(_opts, done).start();
 });
 
 gulp.task('test-ci', ['unit_test'], () => {
