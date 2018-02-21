@@ -1,6 +1,6 @@
 {
   "name": "alt-breadcrumb",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": [
     "dist/alt-breadcrumb.min.js",
     "dist/alt-breadcrumb.min.css"

@@ -21,8 +21,9 @@
                            <div class="breadcrumb-item text-center"
                                 ng-class="{'breadcrumb-selected-item': step.isActive}"
                                 ng-click="_onClick(step)"
-                                ng-repeat="step in _obj.steps">
-                             <p ng-show="_obj.showNumbers">{{$index + 1}}</p>
+                                ng-repeat="step in _obj.steps"
+                                ng-show="!!step.isVisible">
+                             <p ng-show="_obj.showNumbers">{{step.label}}</p>
                              <p ng-show="!_obj.showNumbers && step.isCompleted" class="fa fa-fw fa-check"></p>
                              <p ng-show="!_obj.showNumbers && !step.isCompleted" class="fa fa-fw fa-minus"></p>
                            </div>
@@ -51,7 +52,17 @@
 
           scope._obj = obj;
 
+          var stepNumber = 0;
           for (var i = 0; i < scope._obj.steps.length; i++) {
+            if (i === 0) {
+              stepNumber = i;
+            }
+
+            if (!!scope._obj.steps[i].isVisible) {
+              scope._obj.steps[i].label = stepNumber + 1;
+              stepNumber++;
+            }
+
             scope._obj.steps[i].index = i;
             if(!!scope._obj.steps[i].isActive) {
               scope._mainDescription = scope._obj.steps[i].description;
