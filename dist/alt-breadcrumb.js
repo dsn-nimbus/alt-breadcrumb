@@ -23,8 +23,8 @@
                                 ng-click="_onClick(step)"
                                 ng-repeat="step in _obj.steps"
                                 ng-show="!!step.isVisible">
-                             <p ng-show="_obj.showNumbers">{{step.label}}</p>
-                             <p ng-show="!_obj.showNumbers && step.isCompleted" class="fa fa-fw fa-check"></p>
+                             <p ng-show="!step.isCompleted && _obj.showNumbers">{{step.label}}</p>
+                             <p ng-show="!!step.isCompleted" class="fa fa-fw fa-check"></p>
                              <p ng-show="!_obj.showNumbers && !step.isCompleted" class="fa fa-fw fa-minus"></p>
                            </div>
             			       </div>
@@ -70,16 +70,24 @@
           }
         });
 
-        scope.$on(AltBreadcrumbEventos.EVENTO_NAVEGACAO_REALIZADA, function(evento, index) {
-          if (index < 0) {
-            throw new Error('The given index is not valid.')
+        scope.$on(AltBreadcrumbEventos.EVENTO_NAVEGACAO_REALIZADA, function(evento, obj) {
+          if (!obj) {
+            throw new Error('The breadcrumb update object has not been given.');
+          }
+
+          if (obj.index < 0) {
+            throw new Error('The given index is not valid.');
           }
 
           for (var i = 0; i < scope._obj.steps.length; i++) {
             scope._obj.steps[i].isActive = false;
-            if(scope._obj.steps[i].index === index) {
+            if(scope._obj.steps[i].index === obj.index) {
               scope._obj.steps[i].isActive = true;
               scope._mainDescription = scope._obj.steps[i].description;
+
+              if (i > 0) {
+                scope._obj.steps[i-1].isCompleted = obj.isCompleted;
+              }
             }
           }
         });
