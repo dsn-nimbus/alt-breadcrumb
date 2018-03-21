@@ -7,7 +7,8 @@
       EVENTO_BREADCRUMB_PRONTO: 'alt.breadcrumb_pronto',
       EVENTO_CRIACAO_BREADCRUMB: 'alt.criar_breadcrumb',
       EVENTO_NAVEGACAO_SOLICITADA: 'alt.navegacao_solicitada',
-      EVENTO_DESTRUICAO_BREADCRUMB: 'alt.destruir_breadcrumb'
+      EVENTO_DESTRUICAO_BREADCRUMB: 'alt.destruir_breadcrumb',
+      EVENTO_REINICIALIZACAO_BREADCRUMB: 'alt.reiniciar_breadcrumb'
     })
     .service('AltBreadcrumbService', ['$rootScope', 'AltBreadcrumbEventos', function($rootScope, AltBreadcrumbEventos) {
       this.navegar = function(opt) {
@@ -91,6 +92,15 @@
             }
           }
         });
+
+        scope.$on(AltBreadcrumbEventos.EVENTO_REINICIALIZACAO_BREADCRUMB, function(evento, obj) {
+          for (var i = 0; i < scope._obj.steps.length; i++) {
+            scope._obj.steps[i].isCompleted = false;
+            scope._obj.steps[i].isActive = false;
+          }
+          scope._obj.steps[0].isActive = true;
+          scope._mainDescription = scope._obj.steps[0].description;
+        })
 
         scope.$on(AltBreadcrumbEventos.EVENTO_DESTRUICAO_BREADCRUMB, function(evento, obj) {
           _breadcrumb = undefined;
