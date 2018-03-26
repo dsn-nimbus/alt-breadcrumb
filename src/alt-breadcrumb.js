@@ -79,15 +79,19 @@
           if (obj.index < 0) {
             throw new Error('The given index is not valid.');
           }
-
+          
           for (var i = 0; i < scope._obj.steps.length; i++) {
             scope._obj.steps[i].isActive = false;
             if(scope._obj.steps[i].index === obj.index) {
               scope._obj.steps[i].isActive = true;
               scope._mainDescription = scope._obj.steps[i].description;
 
-              if (i > 0) {
-                scope._obj.steps[i-1].isCompleted = obj.isCompleted;
+              if (obj.mudancaStatus) {
+                if (i > 0 && obj.mudancaStatus.etapaAvancando) {
+                  scope._obj.steps[i-1].isCompleted = obj.mudancaStatus.isCompleted;
+                } else if (i < scope._obj.steps.length - 1 && !obj.mudancaStatus.etapaAvancando) {
+                  scope._obj.steps[i+1].isCompleted = obj.mudancaStatus.isCompleted;
+                }
               }
             }
           }
