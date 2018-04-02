@@ -1,7 +1,7 @@
 {
   "name": "alt-breadcrumb",
   "main": ["dist/alt-breadcrumb.min.js","dist/alt-breadcrumb.min.css"],
-  "version": "0.0.10",
+  "version": "0.0.11",
   "homepage": "https://github.com/dsn-nimbus/alt-breadcrumb.git",
   "authors": ["dsn-nimbus <leonardoebs@gmail.com>"],
   "description": "desc",

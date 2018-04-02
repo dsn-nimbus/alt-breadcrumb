@@ -26,7 +26,7 @@
                                 ng-show="!!step.isVisible">
                              <p ng-show="!step.isCompleted && _obj.showNumbers">{{step.label}}</p>
                              <p ng-show="!!step.isCompleted" class="fa fa-fw fa-check"></p>
-                             <p ng-show="!_obj.showNumbers && !step.isCompleted" class="fa fa-fw fa-minus"></p>
+                             <p ng-show="!_obj.showNumbers && !step.isCompleted" class="fa fa-fw {{step.icon}}"></p>
                            </div>
             			       </div>
                   			 <div class="breadcrumb-description-container text-center" ng-show="_obj.showDescription">
@@ -67,6 +67,10 @@
             scope._obj.steps[i].index = i;
             if(!!scope._obj.steps[i].isActive) {
               scope._mainDescription = scope._obj.steps[i].description;
+            }
+
+            if(!scope._obj.steps[i].icon) {
+              scope._obj.steps[i].icon = 'fa-minus';
             }
           }
         });
