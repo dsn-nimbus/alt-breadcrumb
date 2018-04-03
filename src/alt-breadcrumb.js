@@ -25,8 +25,8 @@
                                 ng-repeat="step in _obj.steps"
                                 ng-show="!!step.isVisible">
                              <p ng-show="!step.isCompleted && _obj.showNumbers">{{step.label}}</p>
-                             <p ng-show="!!step.isCompleted" class="fa fa-fw fa-check"></p>
-                             <p ng-show="!_obj.showNumbers && !step.isCompleted" class="fa fa-fw {{step.icon}}"></p>
+                             <p ng-show="!!_obj.showCompletion && !!step.isCompleted" class="fa fa-fw fa-check"></p>
+                             <p ng-show="!_obj.showNumbers && (!_obj.showCompletion || !step.isCompleted)" class="fa fa-fw {{step.icon}}"></p>
                            </div>
             			       </div>
                   			 <div class="breadcrumb-description-container text-center" ng-show="_obj.showDescription">
@@ -39,6 +39,7 @@
         scope._obj = {
           showNumbers: false,
           showDescription: false,
+          showCompletion: false,
           steps: []
         };
 
