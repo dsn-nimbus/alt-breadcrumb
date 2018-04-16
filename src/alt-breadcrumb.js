@@ -17,22 +17,22 @@
     }])
     .directive('altBreadcrumb', ['$rootScope', '$sce', 'AltBreadcrumbEventos', function($rootScope, $sce, AltBreadcrumbEventos) {
       var _mainDescription = '';
-      var _template = `<div id="alt-breadcrumb">
-                         <div class="breadcrumb-items-container">
-                           <div class="breadcrumb-item text-center"
-                                ng-class="{'breadcrumb-selected-item': step.isActive}"
-                                ng-click="_onClick(step)"
-                                ng-repeat="step in _obj.steps"
-                                ng-show="!!step.isVisible">
-                             <p ng-show="!step.isCompleted && _obj.showNumbers">{{step.label}}</p>
-                             <p ng-show="!!_obj.showCompletion && !!step.isCompleted" class="fa fa-fw fa-check"></p>
-                             <p ng-show="!_obj.showNumbers && (!_obj.showCompletion || !step.isCompleted)" class="fa fa-fw {{step.icon}}"></p>
-                           </div>
-            			       </div>
-                  			 <div class="breadcrumb-description-container text-center" ng-show="_obj.showDescription">
-                  			    <span>{{_mainDescription}}</span>
-                  			 </div>
-                       </div>`;
+      var _template = '<div id="alt-breadcrumb">\
+                         <div class="breadcrumb-items-container">\
+                           <div class="breadcrumb-item text-center"\
+                                ng-class="{\'breadcrumb-selected-item\': step.isActive}"\
+                                ng-click="_onClick(step)"\
+                                ng-repeat="step in _obj.steps"\
+                                ng-show="!!step.isVisible">\
+                             <p ng-show="!step.isCompleted && _obj.showNumbers">{{step.label}}</p>\
+                             <p ng-show="!!_obj.showCompletion && !!step.isCompleted" class="fa fa-fw fa-check"></p>\
+                             <p ng-show="!_obj.showNumbers && (!_obj.showCompletion || !step.isCompleted)" class="fa fa-fw {\{step.icon}}"></p>\
+                           </div>\
+            			       </div>\
+                  			 <div class="breadcrumb-description-container text-center" ng-show="_obj.showDescription">\
+                  			    <span>{{_mainDescription}}</span>\
+                  			 </div>\
+                       </div>';
 
       var _link = function(scope, element, attrs) {
         var _breadcrumb = element.find('#alt-breadcrumb');
